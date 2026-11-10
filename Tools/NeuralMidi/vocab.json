@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "tokens": {
+    "PAD": 0,
+    "BOS": 1,
+    "EOS": 2,
+    "SHIFT0": 3,
+    "SHIFT_COUNT": 32,
+    "VEL0": 35,
+    "VEL_COUNT": 16,
+    "PITCH0": 51,
+    "PITCH_COUNT": 128,
+    "DUR0": 179,
+    "DUR_COUNT": 32,
+    "MUSIC_END": 211,
+    "KEY0": 211,
+    "KEY_COUNT": 24,
+    "TEMPO0": 235,
+    "TEMPO_COUNT": 5,
+    "DENS0": 240,
+    "DENS_COUNT": 3,
+    "REG0": 243,
+    "REG_COUNT": 3,
+    "SEP": 246,
+    "VOCAB": 247
+  },
+  "notes": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
+  "modes": ["major", "minor", "harmonic_minor", "melodic_minor", "dorian", "mixolydian", "phrygian", "lydian"],
+  "bpm_centers": [60, 85, 115, 145, 175]
+}

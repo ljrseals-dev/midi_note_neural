@@ -1,0 +1,878 @@
+{
+  "bach": {
+    "display": "J.S. Bach",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "structured",
+    "tempo_range": [
+      60,
+      100
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.5,
+      "organ": 0.5
+    }
+  },
+  "mozart": {
+    "display": "Mozart",
+    "genre": "classical",
+    "era": "classical",
+    "mood": "elegant",
+    "tempo_range": [
+      80,
+      130
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.7,
+      "strings": 0.3
+    }
+  },
+  "beethoven": {
+    "display": "Beethoven",
+    "genre": "classical",
+    "era": "classical",
+    "mood": "dramatic",
+    "tempo_range": [
+      60,
+      140
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.8,
+      "orchestra": 0.2
+    }
+  },
+  "chopin": {
+    "display": "Chopin",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "melancholy",
+    "tempo_range": [
+      60,
+      90
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "liszt": {
+    "display": "Liszt",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "virtuosic",
+    "tempo_range": [
+      80,
+      160
+    ],
+    "density": "dense",
+    "register": "wide",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "debussy": {
+    "display": "Debussy",
+    "genre": "classical",
+    "era": "impressionist",
+    "mood": "dreamy",
+    "tempo_range": [
+      50,
+      90
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.8,
+      "flute": 0.2
+    }
+  },
+  "ravel": {
+    "display": "Ravel",
+    "genre": "classical",
+    "era": "impressionist",
+    "mood": "colorful",
+    "tempo_range": [
+      60,
+      120
+    ],
+    "density": "medium",
+    "register": "wide",
+    "instruments": {
+      "piano": 0.6,
+      "orchestra": 0.4
+    }
+  },
+  "satie": {
+    "display": "Satie",
+    "genre": "classical",
+    "era": "modern",
+    "mood": "minimal",
+    "tempo_range": [
+      40,
+      70
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "stravinsky": {
+    "display": "Stravinsky",
+    "genre": "classical",
+    "era": "modern",
+    "mood": "rhythmic",
+    "tempo_range": [
+      90,
+      160
+    ],
+    "density": "dense",
+    "register": "wide",
+    "instruments": {
+      "orchestra": 1.0
+    }
+  },
+  "schoenberg": {
+    "display": "Schoenberg",
+    "genre": "classical",
+    "era": "modern",
+    "mood": "atonal",
+    "tempo_range": [
+      60,
+      120
+    ],
+    "density": "medium",
+    "register": "wide",
+    "instruments": {
+      "piano": 0.5,
+      "strings": 0.5
+    }
+  },
+  "philip_glass": {
+    "display": "Philip Glass",
+    "genre": "minimalism",
+    "era": "contemporary",
+    "mood": "hypnotic",
+    "tempo_range": [
+      60,
+      110
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.7,
+      "strings": 0.3
+    }
+  },
+  "steve_reich": {
+    "display": "Steve Reich",
+    "genre": "minimalism",
+    "era": "contemporary",
+    "mood": "pulsing",
+    "tempo_range": [
+      100,
+      140
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "percussion": 0.5,
+      "piano": 0.5
+    }
+  },
+  "erik_satie": {
+    "display": "Erik Satie",
+    "genre": "classical",
+    "era": "modern",
+    "mood": "ambient",
+    "tempo_range": [
+      40,
+      60
+    ],
+    "density": "sparse",
+    "register": "low",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "schubert": {
+    "display": "Schubert",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "lyrical",
+    "tempo_range": [
+      60,
+      100
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.6,
+      "voice": 0.4
+    }
+  },
+  "brahms": {
+    "display": "Brahms",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "warm",
+    "tempo_range": [
+      60,
+      110
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.5,
+      "orchestra": 0.5
+    }
+  },
+  "tchaikovsky": {
+    "display": "Tchaikovsky",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "emotional",
+    "tempo_range": [
+      50,
+      140
+    ],
+    "density": "dense",
+    "register": "wide",
+    "instruments": {
+      "orchestra": 1.0
+    }
+  },
+  "rachmaninoff": {
+    "display": "Rachmaninoff",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "passionate",
+    "tempo_range": [
+      50,
+      120
+    ],
+    "density": "dense",
+    "register": "wide",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "sibelius": {
+    "display": "Sibelius",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "northern",
+    "tempo_range": [
+      50,
+      100
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "orchestra": 1.0
+    }
+  },
+  "mahler": {
+    "display": "Mahler",
+    "genre": "classical",
+    "era": "romantic",
+    "mood": "epic",
+    "tempo_range": [
+      40,
+      140
+    ],
+    "density": "dense",
+    "register": "wide",
+    "instruments": {
+      "orchestra": 1.0
+    }
+  },
+  "handel": {
+    "display": "Handel",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "majestic",
+    "tempo_range": [
+      70,
+      110
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "orchestra": 0.7,
+      "organ": 0.3
+    }
+  },
+  "vivaldi": {
+    "display": "Vivaldi",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "bright",
+    "tempo_range": [
+      90,
+      140
+    ],
+    "density": "medium",
+    "register": "high",
+    "instruments": {
+      "strings": 0.8,
+      "harpsichord": 0.2
+    }
+  },
+  "scarlatti": {
+    "display": "Scarlatti",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "playful",
+    "tempo_range": [
+      80,
+      130
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "harpsichord": 1.0
+    }
+  },
+  "telemann": {
+    "display": "Telemann",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "graceful",
+    "tempo_range": [
+      70,
+      120
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "flute": 0.5,
+      "strings": 0.5
+    }
+  },
+  "pachelbel": {
+    "display": "Pachelbel",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "serene",
+    "tempo_range": [
+      60,
+      80
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "organ": 0.5,
+      "strings": 0.5
+    }
+  },
+  "purcell": {
+    "display": "Purcell",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "solemn",
+    "tempo_range": [
+      50,
+      90
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "voice": 0.5,
+      "strings": 0.5
+    }
+  },
+  "monteverdi": {
+    "display": "Monteverdi",
+    "genre": "classical",
+    "era": "renaissance",
+    "mood": "expressive",
+    "tempo_range": [
+      50,
+      90
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "voice": 0.7,
+      "strings": 0.3
+    }
+  },
+  "palestrina": {
+    "display": "Palestrina",
+    "genre": "classical",
+    "era": "renaissance",
+    "mood": "sacred",
+    "tempo_range": [
+      50,
+      70
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "choir": 1.0
+    }
+  },
+  "despres": {
+    "display": "Josquin des Prez",
+    "genre": "classical",
+    "era": "renaissance",
+    "mood": "polyphonic",
+    "tempo_range": [
+      50,
+      80
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "choir": 1.0
+    }
+  },
+  "byrd": {
+    "display": "William Byrd",
+    "genre": "classical",
+    "era": "renaissance",
+    "mood": "devotional",
+    "tempo_range": [
+      50,
+      80
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "choir": 0.6,
+      "organ": 0.4
+    }
+  },
+  "dowland": {
+    "display": "John Dowland",
+    "genre": "classical",
+    "era": "renaissance",
+    "mood": "melancholy",
+    "tempo_range": [
+      40,
+      70
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "lute": 1.0
+    }
+  },
+  "elllington": {
+    "display": "Duke Ellington",
+    "genre": "jazz",
+    "era": "swing",
+    "mood": "sophisticated",
+    "tempo_range": [
+      90,
+      140
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.3,
+      "bigband": 0.7
+    }
+  },
+  "miles_davis": {
+    "display": "Miles Davis",
+    "genre": "jazz",
+    "era": "modal",
+    "mood": "cool",
+    "tempo_range": [
+      60,
+      120
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "trumpet": 0.5,
+      "piano": 0.3,
+      "bass": 0.2
+    }
+  },
+  "coltrane": {
+    "display": "John Coltrane",
+    "genre": "jazz",
+    "era": "modal",
+    "mood": "intense",
+    "tempo_range": [
+      100,
+      180
+    ],
+    "density": "dense",
+    "register": "high",
+    "instruments": {
+      "sax": 0.6,
+      "piano": 0.2,
+      "drums": 0.2
+    }
+  },
+  "monk": {
+    "display": "Thelonious Monk",
+    "genre": "jazz",
+    "era": "bebop",
+    "mood": "angular",
+    "tempo_range": [
+      80,
+      140
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "bill_evans": {
+    "display": "Bill Evans",
+    "genre": "jazz",
+    "era": "cool",
+    "mood": "lyrical",
+    "tempo_range": [
+      60,
+      100
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "keith_jarrett": {
+    "display": "Keith Jarrett",
+    "genre": "jazz",
+    "era": "contemporary",
+    "mood": "improvisatory",
+    "tempo_range": [
+      50,
+      120
+    ],
+    "density": "medium",
+    "register": "wide",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "herbie_hancock": {
+    "display": "Herbie Hancock",
+    "genre": "jazz",
+    "era": "fusion",
+    "mood": "funky",
+    "tempo_range": [
+      90,
+      130
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.5,
+      "synth": 0.5
+    }
+  },
+  "weather_report": {
+    "display": "Weather Report",
+    "genre": "jazz",
+    "era": "fusion",
+    "mood": "electric",
+    "tempo_range": [
+      90,
+      140
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "bass": 0.3,
+      "keys": 0.3,
+      "sax": 0.2,
+      "drums": 0.2
+    }
+  },
+  "lofi": {
+    "display": "Lo-fi Hip-Hop",
+    "genre": "hiphop",
+    "era": "contemporary",
+    "mood": "chill",
+    "tempo_range": [
+      70,
+      90
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.4,
+      "drums": 0.3,
+      "bass": 0.3
+    }
+  },
+  "ambient": {
+    "display": "Ambient",
+    "genre": "electronic",
+    "era": "contemporary",
+    "mood": "atmospheric",
+    "tempo_range": [
+      40,
+      70
+    ],
+    "density": "sparse",
+    "register": "low",
+    "instruments": {
+      "synth": 0.7,
+      "pads": 0.3
+    }
+  },
+  "house": {
+    "display": "House",
+    "genre": "electronic",
+    "era": "contemporary",
+    "mood": "driving",
+    "tempo_range": [
+      120,
+      130
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "drums": 0.4,
+      "bass": 0.3,
+      "synth": 0.3
+    }
+  },
+  "techno": {
+    "display": "Techno",
+    "genre": "electronic",
+    "era": "contemporary",
+    "mood": "hypnotic",
+    "tempo_range": [
+      125,
+      140
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "drums": 0.5,
+      "synth": 0.5
+    }
+  },
+  "drum_and_bass": {
+    "display": "Drum & Bass",
+    "genre": "electronic",
+    "era": "contemporary",
+    "mood": "energetic",
+    "tempo_range": [
+      160,
+      180
+    ],
+    "density": "dense",
+    "register": "wide",
+    "instruments": {
+      "drums": 0.5,
+      "bass": 0.3,
+      "synth": 0.2
+    }
+  },
+  "trap": {
+    "display": "Trap",
+    "genre": "hiphop",
+    "era": "contemporary",
+    "mood": "dark",
+    "tempo_range": [
+      130,
+      160
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "drums": 0.5,
+      "bass": 0.3,
+      "synth": 0.2
+    }
+  },
+  "bossa_nova": {
+    "display": "Bossa Nova",
+    "genre": "latin",
+    "era": "mid20th",
+    "mood": "relaxed",
+    "tempo_range": [
+      100,
+      130
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "guitar": 0.4,
+      "piano": 0.3,
+      "percussion": 0.3
+    }
+  },
+  "samba": {
+    "display": "Samba",
+    "genre": "latin",
+    "era": "traditional",
+    "mood": "festive",
+    "tempo_range": [
+      90,
+      120
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "percussion": 0.6,
+      "guitar": 0.2,
+      "brass": 0.2
+    }
+  },
+  "tango": {
+    "display": "Tango",
+    "genre": "latin",
+    "era": "traditional",
+    "mood": "passionate",
+    "tempo_range": [
+      60,
+      100
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "bandoneon": 0.4,
+      "strings": 0.3,
+      "piano": 0.3
+    }
+  },
+  "flamenco": {
+    "display": "Flamenco",
+    "genre": "world",
+    "era": "traditional",
+    "mood": "fiery",
+    "tempo_range": [
+      80,
+      140
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "guitar": 0.7,
+      "percussion": 0.3
+    }
+  },
+  "celtic": {
+    "display": "Celtic",
+    "genre": "world",
+    "era": "traditional",
+    "mood": "lively",
+    "tempo_range": [
+      90,
+      140
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "fiddle": 0.4,
+      "flute": 0.3,
+      "harp": 0.3
+    }
+  },
+  "gamelan": {
+    "display": "Gamelan",
+    "genre": "world",
+    "era": "traditional",
+    "mood": "cyclical",
+    "tempo_range": [
+      60,
+      100
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "percussion": 1.0
+    }
+  },
+  "koto": {
+    "display": "Japanese Traditional",
+    "genre": "world",
+    "era": "traditional",
+    "mood": "meditative",
+    "tempo_range": [
+      40,
+      70
+    ],
+    "density": "sparse",
+    "register": "mid",
+    "instruments": {
+      "koto": 0.6,
+      "shakuhachi": 0.4
+    }
+  },
+  "blues": {
+    "display": "Blues",
+    "genre": "blues",
+    "era": "traditional",
+    "mood": "soulful",
+    "tempo_range": [
+      60,
+      100
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "guitar": 0.5,
+      "piano": 0.3,
+      "harmonica": 0.2
+    }
+  },
+  "ragtime": {
+    "display": "Ragtime",
+    "genre": "jazz",
+    "era": "early20th",
+    "mood": "syncopated",
+    "tempo_range": [
+      80,
+      120
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "piano": 1.0
+    }
+  },
+  "gospel": {
+    "display": "Gospel",
+    "genre": "sacred",
+    "era": "traditional",
+    "mood": "uplifting",
+    "tempo_range": [
+      70,
+      120
+    ],
+    "density": "dense",
+    "register": "mid",
+    "instruments": {
+      "piano": 0.4,
+      "organ": 0.3,
+      "choir": 0.3
+    }
+  },
+  "baroque_dance": {
+    "display": "Baroque Dance",
+    "genre": "classical",
+    "era": "baroque",
+    "mood": "courtly",
+    "tempo_range": [
+      80,
+      120
+    ],
+    "density": "medium",
+    "register": "mid",
+    "instruments": {
+      "harpsichord": 0.5,
+      "strings": 0.5
+    }
+  }
+}

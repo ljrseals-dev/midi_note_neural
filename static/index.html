@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MidiNote Neural</title>
+<script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
+<style>
+:root {
+  --bg: #080809; --bg2: #101013; --bg3: #18181c; --bg4: #202026;
+  --line: #232328; --line2: #2e2e36; --text: #e8e8ec; --text2: #6b6b78;
+  --text3: #34343c;
+  --mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --acc: #a3e635; --acc-dim: #a3e63522;
+}
+body.genre-ambient    { --acc:#67e8f9; --acc-dim:#67e8f922; }
+body.genre-jazz       { --acc:#fb923c; --acc-dim:#fb923c22; }
+body.genre-cinematic  { --acc:#c084fc; --acc-dim:#c084fc22; }
+body.genre-lofi       { --acc:#fde68a; --acc-dim:#fde68a22; }
+body.genre-world      { --acc:#f472b6; --acc-dim:#f472b622; }
+body.genre-experimental { --acc:#ff6b35; --acc-dim:#ff6b3522; }
+body.genre-classical  { --acc:#94a3b8; --acc-dim:#94a3b822; }
+body.genre-electronic { --acc:#38bdf8; --acc-dim:#38bdf822; }
+body.genre-folk       { --acc:#86efac; --acc-dim:#86efac22; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--sans);
+  min-height: 100vh; padding: 20px; display: flex; justify-content: center;
+}
+.app {
+  width: 100%; max-width: 1200px;
+  display: grid; grid-template-columns: 1fr 340px; gap: 20px;
+}
+@media (max-width: 900px) { .app { grid-template-columns: 1fr; } }
+
+.feed-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.feed-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--line);
+}
+.brand-name { font-size: 24px; font-weight: 800; color: var(--acc); letter-spacing: -0.02em; }
+.brand-sub { font-family: var(--mono); font-size: 9px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+.feed-title { font-family: var(--mono); font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.feed-card {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 8px;
+  padding: 14px 16px; transition: border-color 0.15s;
+}
+.feed-card:hover { border-color: var(--line2); }
+.card-header { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.card-prompt { font-weight: 700; font-size: 15px; color: var(--acc); }
+.card-meta { font-family: var(--mono); font-size: 10px; color: var(--text2); display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.download-btn {
+  display: inline-block; padding: 6px 12px; background: var(--bg3);
+  border: 1px solid var(--line2); border-radius: 4px; color: var(--text2);
+  font-family: var(--mono); font-size: 10px; text-decoration: none; white-space: nowrap;
+}
+.download-btn:hover { border-color: var(--acc); color: var(--acc); }
+
+midi-player { display: block; width: 100%; margin: 8px 0; }
+midi-player::part(control-panel) { background: var(--bg3); border-radius: 4px; padding: 6px 8px; }
+midi-visualizer {
+  display: block; width: 100%; height: 72px;
+  background: var(--bg4); border-radius: 4px; margin-top: 6px;
+}
+.empty-feed {
+  color: var(--text3); font-family: var(--mono); font-size: 12px;
+  text-align: center; padding: 48px 20px; border: 1px dashed var(--line); border-radius: 8px;
+}
+
+.controls-col { display: flex; flex-direction: column; gap: 12px; }
+.genre-strip {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 6px; padding: 12px;
+}
+.panel-title {
+  font-family: var(--mono); font-size: 9px; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;
+}
+.genre-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.genre-pill {
+  font-family: var(--mono); font-size: 10px; padding: 5px 10px;
+  border: 1px solid var(--line2); border-radius: 3px; cursor: pointer;
+  color: var(--text2); background: var(--bg3); user-select: none;
+}
+.genre-pill:hover { border-color: var(--acc); color: var(--text); }
+.genre-pill.active { background: var(--acc-dim); border-color: var(--acc); color: var(--acc); font-weight: 700; }
+
+.panel {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 6px; padding: 12px;
+}
+.pads-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.pad {
+  background: var(--bg3); border: 1px solid var(--line); border-radius: 4px;
+  padding: 10px 6px; text-align: center; cursor: pointer; user-select: none;
+}
+.pad:hover { border-color: var(--line2); }
+.pad.muted { opacity: 0.35; border-color: #ff6b35; }
+.pad-name { font-family: var(--mono); font-size: 9px; font-weight: 700; }
+
+.param { margin-bottom: 10px; }
+.param:last-child { margin-bottom: 0; }
+.param label {
+  font-family: var(--mono); font-size: 9px; color: var(--text3);
+  display: flex; justify-content: space-between; margin-bottom: 4px; text-transform: uppercase;
+}
+.param label span { color: var(--acc); font-weight: 700; letter-spacing: 0; }
+input[type=range] {
+  width: 100%; height: 2px; background: var(--line2); appearance: none; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance: none; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--acc); cursor: pointer; border: 2px solid var(--bg);
+}
+select, input[type=number], input[type=text] {
+  width: 100%; background: var(--bg3); color: var(--text);
+  border: 1px solid var(--line2); padding: 6px 8px; font-family: var(--mono);
+  font-size: 11px; border-radius: 3px;
+}
+
+.gen-btn {
+  width: 100%; padding: 14px; background: var(--acc-dim); border: 1px solid var(--acc);
+  border-radius: 4px; color: var(--acc); font-family: var(--mono); font-size: 12px;
+  font-weight: 700; cursor: pointer; letter-spacing: 0.03em;
+}
+.gen-btn:hover { background: var(--acc); color: var(--bg); }
+.gen-btn.loading { background: var(--bg2); border-color: var(--line2); color: var(--text2); cursor: not-allowed; }
+
+.train-panel { border-color: #fb923c55; }
+.train-panel .panel-title { color: #fb923c; }
+.train-btn {
+  width: 100%; padding: 10px; background: #fb923c18; border: 1px solid #fb923c;
+  border-radius: 4px; color: #fb923c; font-family: var(--mono); font-size: 11px;
+  font-weight: 700; cursor: pointer; margin-top: 4px;
+}
+.train-btn:hover { background: #fb923c; color: var(--bg); }
+
+.dropzone {
+  border: 1px dashed var(--line2); border-radius: 4px; padding: 14px;
+  text-align: center; font-family: var(--mono); font-size: 10px; color: var(--text2);
+  cursor: pointer; margin-bottom: 10px; transition: all 0.15s;
+}
+.dropzone:hover, .dropzone.drag { border-color: var(--acc); color: var(--acc); background: var(--acc-dim); }
+
+.status-line {
+  font-family: var(--mono); font-size: 10px; color: var(--text2);
+  padding: 8px 0; min-height: 1.4em;
+}
+.ok { color: var(--acc); }
+.warn { color: #fb923c; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="feed-col">
+    <div class="feed-header">
+      <div>
+        <div class="brand-name">MidiNote Neural</div>
+        <div class="brand-sub">Multi-track · Sequential stems · Instant preview</div>
+      </div>
+    </div>
+    <div class="feed-title">Generation history</div>
+    <div id="feed-container">
+      <div class="empty-feed" id="empty-feed">No generations yet. Use the controls to create a track.</div>
+    </div>
+  </div>
+
+  <div class="controls-col">
+    <div class="genre-strip">
+      <div class="panel-title">Genre</div>
+      <div class="genre-pills" id="genre-pills"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Instruments · right-click to mute</div>
+      <div class="pads-grid" id="pads-grid"></div>
+    </div>
+
+    <div class="panel">
+      <div class="param">
+        <label>Neural Model (ckpt)</label>
+        <select id="model-selector">
+          <option value="default_150m.pt">Default ScoreNet (150m)</option>
+        </select>
+      </div>
+      <div class="param">
+        <label>Tempo BPM <span id="tempo-val">120</span></label>
+        <input type="range" min="40" max="220" value="120" id="tempo" oninput="updateUI()">
+      </div>
+      <div class="param">
+        <label>Seed <span id="seed-val">1</span></label>
+        <div style="display:flex;gap:6px;">
+          <input type="number" id="seed" value="1" oninput="updateUI()" style="flex:1;">
+          <button type="button" onclick="newSeed()" style="background:var(--bg3);border:1px solid var(--line2);color:var(--text2);padding:4px 10px;cursor:pointer;border-radius:3px;font-family:var(--mono);">⟳</button>
+        </div>
+      </div>
+      <button class="gen-btn" id="genbtn" type="button" onclick="generateAll()">Generate Neural MIDI</button>
+      <div class="status-line" id="status"></div>
+    </div>
+
+    <div class="panel train-panel">
+      <div class="panel-title">Train ScoreNet</div>
+      <div class="dropzone" id="dropzone"
+           onclick="document.getElementById('corpus-file').click()"
+           ondragover="event.preventDefault(); this.classList.add('drag')"
+           ondragleave="this.classList.remove('drag')"
+           ondrop="onDrop(event)">
+        📁 Drop ZIP of .mid files or click to upload
+        <input type="file" id="corpus-file" accept=".zip" style="display:none" onchange="uploadCorpus(this.files[0])">
+      </div>
+      <div class="param">
+        <label>Preset</label>
+        <select id="train-preset">
+          <option value="tiny">Tiny (fast)</option>
+          <option value="small">Small</option>
+          <option value="150m">150M</option>
+        </select>
+      </div>
+      <div class="param">
+        <label>Steps</label>
+        <input type="number" id="train-steps" value="100" min="10" max="10000">
+      </div>
+      <div class="param">
+        <label>Checkpoint name</label>
+        <input type="text" id="train-ckpt" value="user_ckpt.pt">
+      </div>
+      <button class="train-btn" type="button" onclick="startTraining()">Start Training</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';
+
+const GENRES = {
+  Ambient:      { cls: 'genre-ambient', tempo: [60, 90] },
+  Jazz:         { cls: 'genre-jazz', tempo: [100, 160] },
+  Cinematic:    { cls: 'genre-cinematic', tempo: [60, 100] },
+  'Lo-fi':      { cls: 'genre-lofi', tempo: [70, 95] },
+  World:        { cls: 'genre-world', tempo: [90, 140] },
+  Electronic:   { cls: 'genre-electronic', tempo: [120, 160] },
+  Classical:    { cls: 'genre-classical', tempo: [60, 130] },
+  Folk:         { cls: 'genre-folk', tempo: [80, 120] },
+  Experimental: { cls: 'genre-experimental', tempo: [40, 220] }
+};
+
+const GM_INSTRUMENTS = [
+  { name: 'Grand Piano' }, { name: 'Bright Piano' },
+  { name: 'Elec Grand' }, { name: 'Harpsichord' },
+  { name: 'Hammond Organ' }, { name: 'Accordion' },
+  { name: 'Nylon Guitar' }, { name: 'Overdrive Gtr' },
+  { name: 'Strings' }, { name: 'Drums' }
+];
+
+let activeGenre = null;
+let mutedPads = new Set();
+let cardSeq = 0;
+
+function init() {
+  const gp = document.getElementById('genre-pills');
+  Object.keys(GENRES).forEach(name => {
+    const p = document.createElement('div');
+    p.className = 'genre-pill';
+    p.textContent = name;
+    p.onclick = () => selectGenre(name);
+    gp.appendChild(p);
+  });
+
+  const pg = document.getElementById('pads-grid');
+  GM_INSTRUMENTS.forEach((inst, idx) => {
+    const pad = document.createElement('div');
+    pad.className = 'pad';
+    pad.innerHTML = '<span class="pad-name">' + inst.name + '</span>';
+    pad.oncontextmenu = e => { e.preventDefault(); toggleMute(idx, pad); };
+    pg.appendChild(pad);
+  });
+
+  fetchModels();
+  updateUI();
+}
+
+async function fetchModels() {
+  try {
+    const res = await fetch(API + '/api/models');
+    const data = await res.json();
+    const sel = document.getElementById('model-selector');
+    sel.innerHTML = '';
+    (data.models || []).forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m;
+      sel.appendChild(opt);
+    });
+  } catch (_) {}
+}
+
+function selectGenre(name) {
+  activeGenre = name;
+  const g = GENRES[name];
+  document.body.className = g.cls;
+  document.querySelectorAll('.genre-pill').forEach(p => p.classList.toggle('active', p.textContent === name));
+  document.getElementById('tempo').value = Math.round((g.tempo[0] + g.tempo[1]) / 2);
+  updateUI();
+}
+
+function toggleMute(idx, el) {
+  if (mutedPads.has(idx)) {
+    mutedPads.delete(idx);
+    el.classList.remove('muted');
+  } else {
+    mutedPads.add(idx);
+    el.classList.add('muted');
+  }
+}
+
+function newSeed() {
+  document.getElementById('seed').value = Math.floor(Math.random() * 999999);
+  updateUI();
+}
+
+function updateUI() {
+  document.getElementById('tempo-val').textContent = document.getElementById('tempo').value;
+  document.getElementById('seed-val').textContent = document.getElementById('seed').value;
+}
+
+async function generateAll() {
+  const btn = document.getElementById('genbtn');
+  if (btn.classList.contains('loading')) return;
+
+  const tempo = parseFloat(document.getElementById('tempo').value);
+  const seed = parseInt(document.getElementById('seed').value, 10) || 0;
+  const ckpt = document.getElementById('model-selector').value;
+  const prompt = activeGenre || 'random style';
+
+  const payload = {
+    prompt,
+    controls: {
+      tempo,
+      muted_roles: Array.from(mutedPads).map(i => GM_INSTRUMENTS[i].name)
+    },
+    seed,
+    tempo,
+    ckpt
+  };
+
+  btn.classList.add('loading');
+  btn.textContent = 'Generating…';
+  document.getElementById('status').innerHTML = 'Connecting to NeuralMidi Core…';
+
+  try {
+    const response = await fetch(API + '/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      let detail = 'Generation failed';
+      try {
+        const err = await response.json();
+        detail = err.detail || detail;
+      } catch (_) {}
+      throw new Error(detail);
+    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    addToFeed(payload, url, seed);
+    document.getElementById('status').innerHTML = '<span class="ok">✓ Ready — play in the feed</span>';
+  } catch (err) {
+    document.getElementById('status').innerHTML = '<span class="warn">⚠ ' + err.message + '</span>';
+  } finally {
+    btn.classList.remove('loading');
+    btn.textContent = 'Generate Neural MIDI';
+  }
+}
+
+function addToFeed(payload, midiUrl, seed) {
+  const feed = document.getElementById('feed-container');
+  const empty = document.getElementById('empty-feed');
+  if (empty) empty.remove();
+
+  cardSeq += 1;
+  const vid = 'vis-' + seed + '-' + cardSeq;
+
+  const card = document.createElement('div');
+  card.className = 'feed-card';
+  card.innerHTML =
+    '<div class="card-header">' +
+      '<div>' +
+        '<div class="card-prompt">' + escapeHtml(payload.prompt) + '</div>' +
+        '<div class="card-meta">' +
+          '<span>Seed ' + seed + '</span>' +
+          '<span>' + escapeHtml(payload.ckpt) + '</span>' +
+          '<span>' + payload.tempo + ' BPM</span>' +
+        '</div>' +
+      '</div>' +
+      '<a href="' + midiUrl + '" download="MidiNote_Neural_seed' + seed + '.mid" class="download-btn">↓ Download .mid</a>' +
+    '</div>' +
+    '<midi-player src="' + midiUrl + '" sound-font visualizer="#' + vid + '"></midi-player>' +
+    '<midi-visualizer type="piano-roll" id="' + vid + '" src="' + midiUrl + '"></midi-visualizer>';
+
+  feed.prepend(card);
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('dropzone').classList.remove('drag');
+  const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+  if (f) uploadCorpus(f);
+}
+
+async function uploadCorpus(file) {
+  if (!file) return;
+  if (!file.name.toLowerCase().endsWith('.zip')) {
+    document.getElementById('status').innerHTML = '<span class="warn">⚠ Please upload a .zip file</span>';
+    return;
+  }
+  const zone = document.getElementById('dropzone');
+  const original = zone.innerHTML;
+  zone.textContent = 'Uploading…';
+
+  const form = new FormData();
+  form.append('file', file);
+
+  try {
+    const res = await fetch(API + '/api/upload-corpus', { method: 'POST', body: form });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Upload failed');
+    zone.textContent = '✓ ' + (data.message || 'Corpus uploaded');
+    document.getElementById('status').innerHTML = '<span class="ok">✓ Corpus ready for training</span>';
+    setTimeout(() => { zone.innerHTML = original; }, 2500);
+  } catch (e) {
+    zone.textContent = '⚠ Upload failed';
+    document.getElementById('status').innerHTML = '<span class="warn">⚠ ' + e.message + '</span>';
+    setTimeout(() => { zone.innerHTML = original; }, 2500);
+  }
+}
+
+async function startTraining() {
+  const preset = document.getElementById('train-preset').value;
+  const steps = parseInt(document.getElementById('train-steps').value, 10) || 100;
+  const ckptName = document.getElementById('train-ckpt').value || 'user_ckpt.pt';
+
+  document.getElementById('status').innerHTML =
+    '<span class="warn">⏳ Training started (' + preset + ', ' + steps + ' steps)…</span>';
+
+  try {
+    const res = await fetch(API + '/api/train', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ preset, steps, ckpt_name: ckptName })
+    });
+    const data = await res.json();
+    document.getElementById('status').innerHTML =
+      '<span class="ok">✓ ' + data.message + '</span>';
+    setTimeout(fetchModels, 4000);
+  } catch (e) {
+    document.getElementById('status').innerHTML =
+      '<span class="warn">⚠ Training error: ' + e.message + '</span>';
+  }
+}
+
+init();
+</script>
+</body>
+</html>

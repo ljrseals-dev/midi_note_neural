@@ -1,0 +1,92 @@
+{
+  "piano": {
+    "display": "Acoustic Piano",
+    "gm_program": 0,
+    "category": "keys"
+  },
+  "electric_piano": {
+    "display": "Electric Piano",
+    "gm_program": 4,
+    "category": "keys"
+  },
+  "harpsichord": {
+    "display": "Harpsichord",
+    "gm_program": 6,
+    "category": "keys"
+  },
+  "organ": {
+    "display": "Church Organ",
+    "gm_program": 19,
+    "category": "keys"
+  },
+  "guitar": {
+    "display": "Acoustic Guitar",
+    "gm_program": 24,
+    "category": "guitar"
+  },
+  "electric_guitar": {
+    "display": "Electric Guitar",
+    "gm_program": 27,
+    "category": "guitar"
+  },
+  "bass": {
+    "display": "Acoustic Bass",
+    "gm_program": 32,
+    "category": "bass"
+  },
+  "electric_bass": {
+    "display": "Electric Bass",
+    "gm_program": 33,
+    "category": "bass"
+  },
+  "violin": {
+    "display": "Violin",
+    "gm_program": 40,
+    "category": "strings"
+  },
+  "cello": {
+    "display": "Cello",
+    "gm_program": 42,
+    "category": "strings"
+  },
+  "strings": {
+    "display": "String Ensemble",
+    "gm_program": 48,
+    "category": "strings"
+  },
+  "trumpet": {
+    "display": "Trumpet",
+    "gm_program": 56,
+    "category": "brass"
+  },
+  "sax": {
+    "display": "Alto Sax",
+    "gm_program": 65,
+    "category": "winds"
+  },
+  "flute": {
+    "display": "Flute",
+    "gm_program": 73,
+    "category": "winds"
+  },
+  "clarinet": {
+    "display": "Clarinet",
+    "gm_program": 71,
+    "category": "winds"
+  },
+  "drums": {
+    "display": "Standard Kit",
+    "gm_program": 0,
+    "category": "percussion"
+  },
+  "synth": {
+    "display": "Lead Synth",
+    "gm_program": 80,
+    "category": "synth"
+  },
+  "pad": {
+    "display": "Pad",
+    "gm_program": 88,
+    "category": "synth"
+  }
+}
