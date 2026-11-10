@@ -2,6 +2,8 @@
 
 **Text-to-MIDI studio** — prompt → multi-track Type-1 MIDI. Deterministic, safety-screened, trainable.
 
+MidiNote Neural — a deterministic, safety-screened text-to-MIDI studio. Type a prompt, get a 10-track Type-1 MIDI file that opens in any DAW. Sequential stems (Drums → Bass → Chords → Lead), sample-accurate WebAudio preview, background training on your own .mid corpus, and a one-flag switch between the PyTorch ScoreNet engine and a zero-dependency stub. Same seed + prompt + checkpoint always produces byte-identical output.
+
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Quick start
